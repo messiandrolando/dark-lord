@@ -1,0 +1,66 @@
+from bs4 import BeautifulSoup
+
+html_doc = """
+<html>
+<head>
+<title>Giới thiệu về em</title>
+</head>
+<body>
+<h1>Chào mừng đến với trang cá nhân của em</h1>
+
+<div class="post" id="post-1">
+<h2>Kỹ năng: Lập trình Python</h2>
+<p class="author">Tên: anh tuan</p>
+<p class="content">ky nang: tam on</p>
+</div>
+
+<div class="post" id="post-2">
+<h2>Sở thích: choi game </h2>
+<p class="author">Tên: anh tuan</p>
+<p class="content">so thich:ko bik</p>
+</div>
+
+<table id="users">
+<tr><th>Tên</th><th>Tuổi</th><th>Quốc gia</th></tr>
+<tr><td>anh tuan</td><td>15</td><td>Việt Nam</td></tr>
+</table>
+</body>
+</html>
+"""
+
+# ===================== Bắt đầu xử lý với BeautifulSoup =====================
+soup = BeautifulSoup(html_doc, "html.parser")
+
+# Lấy tiêu đề
+title = soup.title.string
+
+# Lấy tiêu đề bài viết, tác giả, nội dung
+titles = [h2.get_text() for h2 in soup.find_all("h2")]
+authors = [p.get_text().replace("Tên: ", "") for p in soup.select("p.author")]
+contents = [p.get_text() for p in soup.select("p.content")]
+
+# Lấy dữ liệu trong bảng
+rows = []
+for row in soup.select("#users tr")[1:]:  # bỏ dòng tiêu đề
+    cols = [td.get_text() for td in row.find_all("td")]
+    rows.append(cols)
+
+# In kết quả
+print(f"Tiêu đề trang: {title}\n")
+
+print("Tiêu đề bài viết:")
+for t in titles:
+    print(f"    - {t}")
+
+print("\nTác giả:")
+for a in authors:
+    print(f"    - {a}")
+
+print("\nNội dung các đoạn content:")
+for c in contents:
+    print(f"    - {c}")
+
+print("\nDữ liệu bảng Users:")
+for r in rows:
+    print(f"    - Tên: {r[0]}, Tuổi: {r[1]}, Quốc gia: {r[2]}")
+

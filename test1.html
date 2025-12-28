@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>shozaon</title>
+    <h2>HTML Image</h2>
+</head>
+<body>
+    <h1>chao mung ban den voi shozaon</h1>
+    <p>day la shozaon</p>
+
+    <h2>do gia dung</h2>
+    <p> 
+
+    <h2>danh sach</h2>
+    <h3>do da dung</h3>
+    <ol>
+        <li>chao</li>
+        <li>thia</li>
+        <li>dua</li>
+    </ol>
+
+    <h3>do choi</h3>
+    <ul>
+        <li>flycam</li>
+        <img src="flycam.png" alt="Trulli" width="500" height="333">
+        <li>xe hoi B</li>
+        <li>xe may</li>
+    </ul>
+    
+    <h4>do linh tinh</h4>
+    <ol>
+        <li>chua cos</li>
+        <li>chua co</li>
+        <li>chua cos</li>
+    </ol>
+    
+
+</body>
+</html>
+soup = BeautifulSoup(html_doc, 'html.parser')
+
+html_tag = soup.title
+print(html_tag)
+
