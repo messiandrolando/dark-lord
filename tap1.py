@@ -8,27 +8,31 @@ import json
 import os
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
 
-# ========== CẤU HÌNH EMAIL ==========
-# CHỈNH SỬA THÔNG TIN NÀY THEO EMAIL CỦA BẠN
-EMAIL_CONFIG = {
+# Tải cấu hình từ .env
+load_dotenv("apppasswork/.env")
+EMAIL_SENDER = os.getenv("EMAIL_SENDER")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+
+if not EMAIL_SENDER or not EMAIL_PASSWORD:
+    print("❌ Lỗi: Không tìm thấy EMAIL_SENDER hoặc EMAIL_PASSWORD trong .env")
+    exit(1)
+
+# ========== CẤU HÌNH SMTP ==========
+SMTP_CONFIG = {
     'smtp_server': 'smtp.gmail.com',
     'smtp_port': 587,
-    'sender_email': 'tuanbui.ttv@gmail.com',  # Thay bằng email của bạn
-    'sender_password': 'wfto uhct jisc bexr',  # Thay bằng app password của bạn
 }
 
 # ========== DANH SÁCH NGƯỜI NHẬN ==========
-RECIPIENTS = [
-    {
-        "name": "Ngô Văn Hưng",
-        "email": "hungngo0131@gmail.com"
-    },
-    {
-        "name": "Anh Tuấn",
-        "email": "tuanbui.ttv@gmail.com"
-    }
-]
+# Sử dụng thumoisukien.json (dựa trên tài liệu bạn cung cấp)
+try:
+    with open('thumoisukien.json', 'r', encoding='utf-8') as f:
+        RECIPIENTS = json.load(f)
+except FileNotFoundError:
+    print("❌ Lỗi: Không tìm thấy thumoisukien.json")
+    exit(1)
 
 # ========== TEMPLATE EMAIL ==========
 HTML_TEMPLATE = """
@@ -92,7 +96,7 @@ HTML_TEMPLATE = """
                                 font-weight: bold; 
                                 font-size: 18px;
                                 display: inline-block;">
-                                9:00 | 10.11.2019
+                                <strong>{time}</strong> | <strong>{date}</strong>
                             </span>
                         </div>
 
@@ -130,16 +134,18 @@ HTML_TEMPLATE = """
 </html>
 """
 
-def send_email(to_name, to_email, subject):
+def send_email(to_name, to_email, subject, to_time="", to_date=""):
     """Gửi một email đơn giản"""
     
     # Chuẩn bị nội dung email
     html_content = HTML_TEMPLATE.replace("{name}", to_name)
+    html_content = html_content.replace("{time}", to_time)
+    html_content = html_content.replace("{date}", to_date)
     
     try:
         # Tạo email
         msg = MIMEMultipart('alternative')
-        msg['From'] = EMAIL_CONFIG['sender_email']
+        msg['From'] = EMAIL_SENDER
         msg['To'] = to_email
         msg['Subject'] = subject
         
@@ -148,16 +154,16 @@ def send_email(to_name, to_email, subject):
         msg.attach(html_part)
         
         # Kết nối và gửi email
-        with smtplib.SMTP(EMAIL_CONFIG['smtp_server'], EMAIL_CONFIG['smtp_port']) as server:
+        with smtplib.SMTP(SMTP_CONFIG['smtp_server'], SMTP_CONFIG['smtp_port']) as server:
             server.starttls()  # Bảo mật kết nối
-            server.login(EMAIL_CONFIG['sender_email'], EMAIL_CONFIG['sender_password'])
+            server.login(EMAIL_SENDER, EMAIL_PASSWORD)
             server.send_message(msg)
         
         print(f"✅ Đã gửi email đến: {to_name} ({to_email})")
         return True
         
     except smtplib.SMTPAuthenticationError:
-        print(f"❌ Lỗi xác thực! Kiểm tra email và mật khẩu.")
+        print(f"❌ Lỗi xác thực! Kiểm tra email và mật khẩu trong .env.")
         return False
     except Exception as e:
         print(f"❌ Lỗi khi gửi email đến {to_email}: {str(e)}")
@@ -172,8 +178,8 @@ def main():
     
     # Hiển thị thông tin cấu hình
     print(f"\n📋 THÔNG TIN CẤU HÌNH:")
-    print(f"   Email gửi: {EMAIL_CONFIG['sender_email']}")
-    print(f"   SMTP Server: {EMAIL_CONFIG['smtp_server']}:{EMAIL_CONFIG['smtp_port']}")
+    print(f"   Email gửi: {EMAIL_SENDER}")
+    print(f"   SMTP Server: {SMTP_CONFIG['smtp_server']}:{SMTP_CONFIG['smtp_port']}")
     print(f"   Số người nhận: {len(RECIPIENTS)}")
     
     # Xác nhận trước khi gửi
@@ -190,7 +196,7 @@ def main():
     
     success_count = 0
     for person in RECIPIENTS:
-        if send_email(person['name'], person['email'], subject):
+        if send_email(person['name'], person['email'], subject, person.get('time', ''), person.get('date', '')):
             success_count += 1
     
     # Hiển thị kết quả
