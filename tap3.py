@@ -90,7 +90,7 @@ def main():
 
     # Đọc data
     try:
-        with open(r'C:\module_python\bt ve email\data.json', 'r', encoding='utf-8') as f:
+        with open(r'C:\module_python\data.json', 'r', encoding='utf-8') as f:
             students = json.load(f)
     except FileNotFoundError:
         print("❌ Lỗi: Không tìm thấy file data.json")
