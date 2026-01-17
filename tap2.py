@@ -12,15 +12,19 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime
 import getpass
+from dotenv import load_dotenv
+
+# Load biến từ file .env
+load_dotenv("C:\\module_python\\apppasswork\\.env")
 
 class BirthdayEmailSystem:
     """Hệ thống gửi email chúc mừng sinh nhật"""
     
     def __init__(self):
-        self.smtp_server = "smtp.gmail.com"
-        self.smtp_port = 587
-        self.sender_email = "tuanbui.ttv@gmail.com"
-        self.sender_password = "wfto uhct jisc bexr"
+        self.smtp_server = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+        self.smtp_port = int(os.getenv("SMTP_PORT", 587))
+        self.sender_email = os.getenv("EMAIL_SENDER", "tuanbui.ttv@gmail.com")
+        self.sender_password = os.getenv("EMAIL_PASSWORD", "")
         self.recipients = []
         self.html_template = "C:\\module_python\\emails_template\\html_template\\text.html"
         
