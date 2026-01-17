@@ -14,7 +14,7 @@ SENDER_PASSWORD = os.getenv("EMAIL_PASSWORD")
 def send_email(student_data, html_template):
     # Sử dụng 'related' để cho phép đính kèm ảnh hiển thị inline
     msg = MIMEMultipart('related') 
-    msg['Subject'] = f"GIẤY BÁO DỰ THI ĐGNL - {student_data['ho_ten']}"
+    msg['Subject'] = f"GIẤY BÁO DỰ THI ĐGNL - {student_data['NAME']}"
     msg['From'] = SENDER_EMAIL
     msg['To'] = student_data['email']
 
