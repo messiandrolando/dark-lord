@@ -1,0 +1,40 @@
+[
+  {
+    "email": "hungngo0131@gmail.com",
+    "sbd": "23014567",
+    "ngay_thi": "07g30 ngày 26/3/2023",
+    "dia_diem": "Trường ĐH Bách khoa (CS Lý Thường Kiệt) - B1, 268 Lý Thường Kiệt, P.14, Q.10, TP.HCM",
+    "link_dia_diem": "https://goo.gl/maps/example",
+    "phong_thi": "P.001 [ABC]",
+    "ma_ho_so": "23000001",
+    "ho_ten": "Nguyễn Văn A",
+    "gioi_tinh": "Nam",
+    "ngay_sinh": "01/01/2005",
+    "noi_sinh": "Thành phố Hồ Chí Minh",
+    "cccd": "079205000000",
+    "ngay_cap": "01/01/2020",
+    "noi_cap": "Cục Cảnh sát Quản lý Hành chính về trật tự xã hội",
+    "dia_chi": "Phường Hoà An, Quận Cẩm Lệ, Thành phố Đà Nẵng",
+    "sdt": "0901234567",
+    "email_lien_lac": "<EMAIL>"
+  },
+  {
+    "email": "tuanbui.ttv@gmail.com",
+    "sbd": "23014567",
+    "ngay_thi": "07g30 ngày 26/3/2023",
+    "dia_diem": "Trường ĐH Bách khoa (CS Lý Thường Kiệt) - B1, 268 Lý Thường Kiệt, P.14, Q.10, TP.HCM",
+    "link_dia_diem": "https://goo.gl/maps/example",
+    "phong_thi": "P.001 [ABC]",
+    "ma_ho_so": "23000001",
+    "ho_ten": "Nguyễn Văn A",
+    "gioi_tinh": "Nam",
+    "ngay_sinh": "01/01/2005",
+    "noi_sinh": "Thành phố Hồ Chí Minh",
+    "cccd": "079205000000",
+    "ngay_cap": "01/01/2020",
+    "noi_cap": "Cục Cảnh sát Quản lý Hành chính về trật tự xã hội",
+    "dia_chi": "Phường Hoà An, Quận Cẩm Lệ, Thành phố Đà Nẵng",
+    "sdt": "0901234567",
+    "email_lien_lac": "<EMAIL>"
+  }
+]

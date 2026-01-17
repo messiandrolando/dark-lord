@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+    body { font-family: 'Times New Roman', Times, serif; color: #000; line-height: 1.4; }
+    .container { max-width: 800px; margin: 0 auto; border: 1px solid #ddd; padding: 20px; }
+    .header-table { width: 100%; border-bottom: 2px solid #000; margin-bottom: 20px; }
+    .logo { width: 100px; }
+    .title { text-align: center; font-weight: bold; font-size: 20px; text-transform: uppercase; margin-bottom: 5px; }
+    .sub-title { text-align: center; font-weight: bold; font-size: 18px; text-transform: uppercase; margin-bottom: 20px; }
+    .section-title { font-weight: bold; text-transform: uppercase; font-size: 14px; margin-top: 15px; margin-bottom: 5px; text-decoration: underline; }
+    .info-table { width: 100%; font-size: 14px; }
+    .info-table td { padding: 4px 0; vertical-align: top; }
+    .label { font-weight: bold; width: 140px; }
+    .red-text { color: #d93025; font-style: italic; }
+    .barcode { margin-top: 20px; height: 50px; }
+    a { color: #1a73e8; text-decoration: none; }
+</style>
+</head>
+<body>
+    <div class="container">
+        <table class="header-table">
+            <tr>
+                <td width="20%" style="vertical-align: top;">
+                    <img src="https://vnur.vn/wp-content/uploads/2023/01/3.DHQG-HCM.jpeg" alt="Logo" class="logo">
+                </td>
+                <td width="80%" style="text-align: center; vertical-align: middle;">
+                    <div class="title">GIẤY BÁO DỰ THI</div>
+                    <div class="sub-title">KỲ THI ĐÁNH GIÁ NĂNG LỰC ĐHQG-HCM</div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="section-title">THÔNG TIN DỰ THI</div>
+        <table class="info-table">
+            <tr>
+                <td class="label">Số báo danh:</td>
+                <td><b>{{sbd}}</b></td>
+            </tr>
+            <tr>
+                <td class="label">Ngày giờ thi:</td>
+                <td><b>{{ngay_thi}}</b></td>
+            </tr>
+            <tr>
+                <td class="label">Địa điểm thi:</td>
+                <td><b>{{dia_diem}}</b> (<a href="{{link_dia_diem}}">Xem bản đồ</a>)</td>
+            </tr>
+            <tr>
+                <td class="label">Phòng thi:</td>
+                <td><b>{{phong_thi}}</b></td>
+            </tr>
+            <tr>
+                <td class="label">Mã hồ sơ:</td>
+                <td>{{ma_ho_so}}</td>
+            </tr>
+        </table>
+
+        <div class="section-title">THÔNG TIN CÁ NHÂN</div>
+        <table class="info-table">
+            <tr>
+                <td class="label">Họ và tên thí sinh:</td>
+                <td width="40%"><b>{{ho_ten}}</b></td>
+                <td class="label" width="100px">Giới tính:</td>
+                <td>{{gioi_tinh}}</td>
+            </tr>
+            <tr>
+                <td class="label">Ngày sinh:</td>
+                <td colspan="3">{{ngay_sinh}}</td>
+            </tr>
+            <tr>
+                <td class="label">Nơi sinh:</td>
+                <td colspan="3">{{noi_sinh}}</td>
+            </tr>
+            <tr>
+                <td class="label">Số CMND/CCCD:</td>
+                <td>{{cccd}}</td>
+                <td class="label">Ngày cấp:</td>
+                <td>{{ngay_cap}}</td>
+            </tr>
+            <tr>
+                <td class="label">Nơi cấp:</td>
+                <td colspan="3">{{noi_cap}}</td>
+            </tr>
+        </table>
+
+        <div class="section-title">THÔNG TIN LIÊN LẠC</div>
+        <table class="info-table">
+            <tr>
+                <td class="label">Địa chỉ liên lạc:</td>
+                <td>{{dia_chi}}</td>
+            </tr>
+            <tr>
+                <td class="label">Số điện thoại:</td>
+                <td>{{sdt}}</td>
+            </tr>
+            <tr>
+                <td class="label">Email:</td>
+                <td>{{email_lien_lac}}</td>
+            </tr>
+        </table>
+
+        <div style="margin-top: 20px;">
+            <strong style="color: #d93025;">Thí sinh cần lưu ý:</strong>
+            <div class="red-text" style="font-size: 13px;">
+                1. Thí sinh phải có mặt tại phòng thi đúng thời gian quy định ghi trong giấy báo dự thi để làm thủ tục dự thi.<br>
+                2. Khi đi thi, thí sinh cần mang theo những giấy tờ sau:<br>
+                - Giấy báo dự thi (bản in từ website hoặc email này);<br>
+                - Giấy tờ tùy thân mà thí sinh đã sử dụng để đăng ký dự thi (bản chính).<br>
+                3. Thí sinh đọc và làm theo các yêu cầu trong Quy định dành cho thí sinh tại địa chỉ <a href="#">thinangluc.vnuhcm.edu.vn</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 15px;">
+            <img src="https://bwipjs-api.metafloor.com/?bcid=code128&text={{sbd}}&height=10" alt="Barcode" class="barcode">
+        </div>
+        <hr>
+    </div>
+</body>
+</html>
